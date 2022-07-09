@@ -21,7 +21,7 @@ def PSA_AGP_DP(A, B, g = 1, h = 2):
         c[i][0] = -h - g * i
     for j in range(1, n + 1):
         a[0][j] = -float('Inf')
-        b[0][j] = -h - g * i
+        b[0][j] = -h - g * j
         c[0][j] = -float('Inf')
     a[0][0] = 0
     b[0][0] = -h
