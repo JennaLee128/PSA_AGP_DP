@@ -119,6 +119,7 @@ if __name__ == "__main__":
     f2 = open('C:/Users/LYZ/Desktop/2.fasta', 'r')
     A, A_name = input_seq(f1)
     B, B_name = input_seq(f2)
+
     print('序列A的长度为：', len(A))
     print('序列B的长度为：', len(B))
     psa, seq_A, seq_B = PSA_AGP_DP(A, B)
