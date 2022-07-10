@@ -36,40 +36,56 @@ def PSA_AGP_DP(A, B, g = 1, h = 2):
     seq_A = ""
     seq_B = ""
     ret = max(a[m][n], b[m][n], c[m][n])
+    flag = '_'
+    if ret == a[m][n]:
+        flag = 'a'
+    elif ret == b[m][n]:
+        flag = 'b'
+    else:
+        flag = 'c'
     while (i > 0 or j > 0):
         if i > 0 and j > 0:
-            if ret == a[i][j]:
+            if flag == 'a':
                 seq_A += A[i - 1]
                 seq_B += B[j - 1]
                 if ret == p(A[i - 1], B[j - 1]) + a[i - 1][j - 1]:
                     ret = a[i - 1][j - 1]
+                    flag = 'a'
                 elif ret == p(A[i - 1], B[j - 1]) + b[i - 1][j - 1]:
                     ret = b[i - 1][j - 1]
+                    flag = 'b'
                 elif ret == p(A[i - 1], B[j - 1]) + c[i - 1][j - 1]:
                     ret = c[i - 1][j - 1]
+                    flag = 'c'
                 i -= 1
                 j -= 1
                 continue
-            elif ret == b[i][j]:
+            elif flag == 'b':
                 seq_A += '-'
                 seq_B += B[j - 1]
-                if ret == -h-g+a[i][j - 1]:
+                if ret == -h - g + a[i][j - 1]:
                     ret = a[i][j - 1]
-                elif ret == -g+b[i][j - 1]:
+                    flag = 'a'
+                elif ret == -g + b[i][j - 1]:
                     ret = b[i][j - 1]
-                elif ret == -h-g+c[i][j - 1]:
+                    flag = 'b'
+                elif ret == -h - g + c[i][j - 1]:
                     ret = c[i][j - 1]
+                    flag = 'c'
                 j -= 1
                 continue
             else:
                 seq_A += A[i - 1]
                 seq_B += '-'
-                if ret == -h-g+a[i - 1][j]:
+                if ret == -h - g + a[i - 1][j]:
                     ret = a[i - 1][j]
-                elif ret == -h-g+b[i - 1][j]:
+                    flag = 'a'
+                elif ret == -h - g + b[i - 1][j]:
                     ret = b[i - 1][j]
-                elif ret == -g+c[i - 1][j]:
+                    flag = 'b'
+                elif ret == -g + c[i - 1][j]:
                     ret = c[i - 1][j]
+                    flag = 'c'
                 i -= 1
                 continue
         if i > 0:
@@ -115,7 +131,7 @@ def output_seq(X, X_name, f):
 
 if __name__ == "__main__":
     # input sequences
-    f1 = open('C:/Users/LYZ/Desktop/1.fasta', 'r')
+    '''f1 = open('C:/Users/LYZ/Desktop/1.fasta', 'r')
     f2 = open('C:/Users/LYZ/Desktop/2.fasta', 'r')
     A, A_name = input_seq(f1)
     B, B_name = input_seq(f2)
@@ -131,4 +147,10 @@ if __name__ == "__main__":
     output_seq(seq_A, A_name, f3)
     output_seq(seq_B, B_name, f4)
 
-    print('比对结束！\n')
+    print('比对结束！\n')'''
+    A = "ACTTTGCCATTGACCCCCCCCCCCCAATTTTGA"
+    B = "ACGTGTTGCCATTCCAATTTTCATTA"
+    psa, seq_A, seq_B = PSA_AGP_DP(A, B)
+    print(psa)
+    print(seq_A)
+    print(seq_B)
